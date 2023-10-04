@@ -9,7 +9,7 @@ const {
   postPractitioner,
   postAppointment,
   printAllAppointmentsAssignedToPatient
-} = require('./samples');
+} = require('../samples');
 
 const app = express();
 const port = 4000; // Porta em que o servidor irá escutar
