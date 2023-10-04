@@ -12,7 +12,7 @@ const {
 } = require('./samples');
 
 const app = express();
-const port = 3000 || process.env.PORT; // Porta em que o servidor irá escutar
+const port = 4000; // Porta em que o servidor irá escutar
 
 // Habilitar o middleware CORS para permitir solicitações de qualquer origem
 app.use(cors());
@@ -21,6 +21,10 @@ app.use(cors());
 app.use(express.json());
 
 // Rota de exemplo
+app.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
+
 app.get('/patients', async (req, res) => {
   const accessToken = await getAuthToken();
   const data = await getPatients(accessToken);
