@@ -8,7 +8,9 @@ const {
   getPractitioners,
   postPractitioner,
   postAppointment,
-  printAllAppointmentsAssignedToPatient
+  printAllAppointmentsAssignedToPatient,
+  postPerson,
+  getPerson
 } = require('../samples');
 
 const app = express();
@@ -28,6 +30,13 @@ app.get('/', (req, res) => {
 app.get('/patients', async (req, res) => {
   const accessToken = await getAuthToken();
   const data = await getPatients(accessToken);
+
+  res.json(data?.entry || []);
+});
+
+app.get('/person', async (req, res) => {
+  const accessToken = await getAuthToken();
+  const data = await getPerson(accessToken);
 
   res.json(data?.entry || []);
 });
@@ -65,6 +74,13 @@ app.get('/patients/:id', async (req, res) => {
 app.post('/patients', async (req, res) => {
   const accessToken = await getAuthToken();
   const patientId = await postPatient(accessToken, req.body);
+
+  res.json({ patientId });
+});
+
+app.post('/person', async (req, res) => {
+  const accessToken = await getAuthToken();
+  const patientId = await postPerson(accessToken, req.body);
 
   res.json({ patientId });
 });
